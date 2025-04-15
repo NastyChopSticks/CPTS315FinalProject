@@ -1,3 +1,5 @@
 *
 !**/*.py
+!genreClassificationSVM/features_30_sec.csv
+!genreClassificationSVM/features_3_sec.csv
 !*/
