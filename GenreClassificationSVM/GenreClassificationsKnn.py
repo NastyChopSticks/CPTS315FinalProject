@@ -15,16 +15,16 @@ class KNN:
 
     # Queue up distance calculations for each point in the training set
     def predictHelper(self, x):
-        distances = [self.predictHelper(x) for x in x]
+        distances = [euclidean_distance(x, x_train) for x_train in self.X_train]
 
         # Gives original indices after sorting, so we get indices of closest three neighbors which are first k elements in sorted list
         k_indices = np.argsort(distances)[:self.k]
-        k_nearest_labels = [self.y_train[i] for i in k_indices]
+        k_nearest_labels = [self.Y_train[i] for i in k_indices]
 
         # majority vote
-        common = Counter(k_nearest_labels).most_common()
-        return common
+        common = Counter(k_nearest_labels).most_common(1)
+        return common[0][0]
 
     # Computer calculates euclidean distance
     def predict(self, x):
-        distances = [euclidean_distance(x, x_train) for x_train in self.X_train]
+        return [self.predictHelper(it) for it in x]
